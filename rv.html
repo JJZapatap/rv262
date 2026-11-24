@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Realidad Virtual · Galería de recursos digitales · Universidad del Magdalena</title>
+<meta name="description" content="Galería de recursos digitales del curso Realidad Virtual, Licenciatura en Tecnologías, Universidad del Magdalena.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@500;700&family=Outfit:wght@300;400;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#08031c; --panel:#120a33; --panel2:#1d1050;
+  --violet:#8a5cff; --pink:#ff3ea5; --amber:#ffb347; --cyan:#27e6ff;
+  --text:#f1ebff; --muted:#a79ad6; --line:rgba(170,130,255,.24);
+  --display:'Unbounded','Trebuchet MS',sans-serif; --body:'Outfit','Segoe UI',sans-serif;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--text);font-family:var(--body);font-size:17px;line-height:1.6;overflow-x:hidden}
+#bg{position:fixed;inset:0;width:100%;height:100%;z-index:-1}
+a{color:inherit}
+:focus-visible{outline:2px solid var(--amber);outline-offset:3px}
+
+.top{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:14px clamp(16px,5vw,64px);border-bottom:1px solid var(--line);background:rgba(8,3,28,.65);backdrop-filter:blur(10px);position:sticky;top:0;z-index:5}
+.brand{display:flex;align-items:center;gap:12px;text-decoration:none}
+.logo{height:44px;width:auto;display:block}
+.logo-fallback{display:none;width:44px;height:44px;border-radius:12px;border:1.5px solid var(--pink);place-items:center;font-family:var(--display);font-size:13px;color:var(--pink)}
+.brand b{font-family:var(--display);font-weight:500;font-size:13px;line-height:1.25}
+.brand span{display:block;font-family:var(--body);font-weight:300;font-size:12.5px;color:var(--muted)}
+.switch{display:flex;gap:4px;padding:4px;border:1px solid var(--line);border-radius:99px;background:rgba(18,10,51,.7)}
+.switch a{padding:7px 16px;border-radius:99px;font-size:14.5px;text-decoration:none;color:var(--muted)}
+.switch a:hover{color:var(--text)}
+.switch a.on{background:linear-gradient(95deg,var(--pink),var(--violet));color:#fff;font-weight:600}
+
+.hero{position:relative;min-height:88vh;display:grid;grid-template-columns:1.15fr .85fr;align-items:center;gap:24px;padding:clamp(40px,8vw,96px) clamp(16px,5vw,64px);overflow:hidden}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:22px}
+.chip{display:inline-flex;align-items:center;gap:7px;padding:5px 13px 5px 9px;border:1px solid var(--line);border-radius:99px;background:rgba(29,16,80,.6);font-size:14px;color:var(--muted)}
+.chip svg{width:18px;height:18px}
+h1{font-family:var(--display);font-weight:700;font-size:clamp(34px,6.2vw,76px);line-height:1.04;letter-spacing:-.02em;text-wrap:balance}
+h1 .glow{background:linear-gradient(95deg,var(--amber),var(--pink) 50%,var(--violet));-webkit-background-clip:text;background-clip:text;color:transparent;display:block}
+.lead{max-width:56ch;margin-top:22px;color:var(--muted);font-size:clamp(16px,1.6vw,19px)}
+.course{display:inline-flex;align-items:center;gap:14px;margin-top:30px;padding:12px 20px 12px 14px;border:1px solid var(--line);border-radius:16px;background:rgba(18,10,51,.7)}
+.course svg{width:38px;height:38px;flex:none}
+.course small{display:block;color:var(--muted);font-size:13px;line-height:1.2}
+.course strong{font-weight:600;font-size:17px}
+
+/* Visor VR */
+.hero-viz{display:grid;place-items:center;position:relative}
+.orbit{position:absolute;width:min(100%,460px);aspect-ratio:1;border-radius:50%;border:1.5px dashed rgba(255,62,165,.45);animation:spin 40s linear infinite}
+.orbit.o2{width:min(78%,360px);border-color:rgba(138,92,255,.5);animation-duration:28s;animation-direction:reverse}
+.orbit::after{content:"";position:absolute;top:-6px;left:50%;width:12px;height:12px;border-radius:50%;background:var(--amber);box-shadow:0 0 16px 4px var(--amber)}
+.headset{position:relative;width:min(80%,380px);filter:drop-shadow(0 0 34px rgba(255,62,165,.5));animation:float 6s ease-in-out infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+@keyframes float{50%{transform:translateY(-14px) rotate(-1.5deg)}}
+
+section.gallery{padding:clamp(48px,7vw,88px) clamp(16px,5vw,64px)}
+.sec-head{max-width:1200px;margin:0 auto 36px;display:flex;align-items:end;justify-content:space-between;gap:20px;flex-wrap:wrap}
+.sec-head h2{font-family:var(--display);font-weight:500;font-size:clamp(24px,3.4vw,38px)}
+.sec-head p{color:var(--muted);max-width:46ch}
+.grid{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:repeat(auto-fill,minmax(290px,1fr));gap:24px}
+.card{position:relative;display:flex;flex-direction:column;padding:26px;border-radius:22px;background:linear-gradient(160deg,var(--panel2),var(--panel) 55%);border:1px solid var(--line);transition:transform .25s,border-color .25s,box-shadow .25s}
+.card::before{content:"";position:absolute;left:26px;right:26px;top:0;height:3px;border-radius:0 0 4px 4px;background:linear-gradient(90deg,var(--amber),var(--pink),var(--violet))}
+.card:hover{transform:translateY(-6px);border-color:var(--pink);box-shadow:0 18px 50px -18px rgba(255,62,165,.5)}
+.num{position:absolute;top:18px;right:22px;font-family:var(--display);font-size:13px;color:var(--muted);opacity:.7}
+.ico{width:60px;height:60px;border-radius:16px;display:grid;place-items:center;margin-bottom:18px;background:radial-gradient(circle at 30% 25%,rgba(255,62,165,.3),rgba(138,92,255,.14));border:1px solid var(--line)}
+.ico svg{width:34px;height:34px}
+.card h3{font-family:var(--display);font-weight:500;font-size:20px;line-height:1.25;margin-bottom:10px}
+.card p{color:var(--muted);font-size:16px;flex:1}
+.team{margin:18px 0 22px;padding-top:14px;border-top:1px dashed var(--line);font-size:15.5px}
+.team small{display:block;color:var(--muted);font-size:13px}
+.team span{display:block;font-weight:600}
+.rv-btn{position:relative;overflow:hidden;display:flex;align-items:center;justify-content:center;gap:12px;padding:14px 18px;border-radius:14px;text-decoration:none;font-weight:600;font-size:16px;color:#fff;background:linear-gradient(95deg,var(--pink),var(--violet));animation:pulse 2.6s infinite}
+.rv-btn svg{width:30px;height:30px;flex:none}
+.rv-btn::after{content:"";position:absolute;top:0;bottom:0;width:40%;left:-60%;background:linear-gradient(100deg,transparent,rgba(255,255,255,.45),transparent);transform:skewX(-20deg)}
+.rv-btn:hover::after{animation:sweep .9s ease}
+.rv-btn:hover{filter:brightness(1.12)}
+@keyframes sweep{to{left:130%}}
+@keyframes pulse{70%{box-shadow:0 0 0 12px rgba(255,62,165,0)}0%{box-shadow:0 0 0 0 rgba(255,62,165,.55)}100%{box-shadow:0 0 0 0 rgba(255,62,165,0)}}
+
+footer{border-top:1px solid var(--line);padding:32px clamp(16px,5vw,64px);display:flex;align-items:center;justify-content:space-between;gap:18px;flex-wrap:wrap;color:var(--muted);font-size:15px;background:rgba(8,3,28,.7)}
+footer .brand b{font-size:12px}
+
+@media (max-width:860px){
+  .hero{grid-template-columns:1fr;min-height:auto}
+  .hero-viz{order:-1;min-height:280px}.headset{width:min(62%,260px)}
+  .orbit{width:min(86%,320px)}
+  .brand b span{display:none}
+}
+@media (prefers-reduced-motion:reduce){.orbit,.headset,.rv-btn{animation:none}.card{transition:none}}
+</style>
+</head>
+<body>
+<canvas id="bg" aria-hidden="true"></canvas>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <linearGradient id="g" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#ffb347"/><stop offset=".5" stop-color="#ff3ea5"/><stop offset="1" stop-color="#8a5cff"/></linearGradient>
+    <symbol id="i-vr" viewBox="0 0 48 48" fill="none" stroke="url(#g)" stroke-width="2.4" stroke-linejoin="round" stroke-linecap="round"><path d="M6 15h36a2 2 0 0 1 2 2v13a4 4 0 0 1-4 4h-6.5a4 4 0 0 1-3.4-1.9L29 29.5a6 6 0 0 0-10 0l-2.1 2.6a4 4 0 0 1-3.4 1.9H8a4 4 0 0 1-4-4V17a2 2 0 0 1 2-2Z"/><circle cx="14.5" cy="23.5" r="2.2"/><circle cx="33.5" cy="23.5" r="2.2"/></symbol>
+    <symbol id="i-cube" viewBox="0 0 48 48" fill="none" stroke="url(#g)" stroke-width="2.4" stroke-linejoin="round" stroke-linecap="round"><path d="M24 4 41 13.5v21L24 44 7 34.5v-21L24 4Z"/><path d="M7 13.5 24 23l17-9.5M24 23v21"/></symbol>
+    <symbol id="i-globe" viewBox="0 0 48 48" fill="none" stroke="url(#g)" stroke-width="2.4" stroke-linecap="round"><circle cx="24" cy="24" r="19"/><ellipse cx="24" cy="24" rx="8" ry="19"/><path d="M6 18h36M6 30h36"/></symbol>
+    <symbol id="i-hand" viewBox="0 0 48 48" fill="none" stroke="url(#g)" stroke-width="2.4" stroke-linejoin="round" stroke-linecap="round"><path d="M17 26V10a3 3 0 0 1 6 0v12M23 20v-4a3 3 0 0 1 6 0v6M29 20a3 3 0 0 1 6 0v10c0 8-5 13-12 13-6 0-9-3-12-8l-4-7a3 3 0 0 1 5-3l3 4"/></symbol>
+    <symbol id="i-pano" viewBox="0 0 48 48" fill="none" stroke="url(#g)" stroke-width="2.4" stroke-linejoin="round" stroke-linecap="round"><path d="M4 14c10 4 30 4 40 0v20c-10-4-30-4-40 0V14Z"/><circle cx="17" cy="22" r="2.5"/><path d="m8 31 9-6 7 5 6-4 10 6"/></symbol>
+    <!-- Visor VR con pasador (botón) -->
+    <symbol id="b-vr" viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round" stroke-linecap="round"><path d="M3 10.5h26a1.5 1.5 0 0 1 1.5 1.5v9a3 3 0 0 1-3 3h-4.5a3 3 0 0 1-2.5-1.4l-1.4-2.1a4.5 4.5 0 0 0-7.2 0l-1.4 2.1A3 3 0 0 1 8 24.5H4.5a3 3 0 0 1-3-3V12A1.5 1.5 0 0 1 3 10.5Z"/><circle cx="9.5" cy="16.5" r="1.6" fill="currentColor"/><circle cx="22.5" cy="16.5" r="1.6" fill="currentColor"/></symbol>
+  </defs>
+</svg>
+
+<header class="top">
+  <a class="brand" href="#inicio">
+    <img class="logo" src="logo-unimagdalena.png" alt="Logo Universidad del Magdalena" onerror="this.style.display='none';this.nextElementSibling.style.display='grid'">
+    <span class="logo-fallback">UM</span>
+    <b>Universidad del Magdalena<span>Licenciatura en Tecnologías</span></b>
+  </a>
+  <nav class="switch" aria-label="Cambiar de curso"><a href="index.html">Realidad Aumentada</a><a class="on" href="rv.html" aria-current="page">Realidad Virtual</a></nav>
+</header>
+
+<main id="inicio">
+  <div class="hero">
+    <div>
+      <div class="chips" aria-label="Tecnologías inmersivas">
+        <span class="chip"><svg><use href="#i-vr"/></svg>Realidad Virtual</span>
+        <span class="chip"><svg><use href="#i-pano"/></svg>360°</span>
+        <span class="chip"><svg><use href="#i-globe"/></svg>Mundos 3D</span>
+        <span class="chip"><svg><use href="#i-hand"/></svg>Interacción</span>
+      </div>
+      <h1>Realidad Virtual <span class="glow">Galería de recursos digitales</span></h1>
+      <p class="lead">Mundos, laboratorios y recorridos inmersivos creados por los estudiantes del Programa de Licenciatura en Tecnologías. Ponte las gafas, o abre el enlace en tu navegador, y entra.</p>
+      <div class="course">
+        <svg viewBox="0 0 48 48"><use href="#i-vr"/></svg>
+        <div><small>Curso</small><strong>Realidad Virtual · Licenciatura en Tecnologías</strong></div>
+      </div>
+    </div>
+    <div class="hero-viz" aria-hidden="true">
+      <div class="orbit"></div><div class="orbit o2"></div>
+      <svg class="headset" viewBox="0 0 400 300" fill="none">
+        <defs>
+          <linearGradient id="hb" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#ffb347"/><stop offset=".5" stop-color="#ff3ea5"/><stop offset="1" stop-color="#8a5cff"/></linearGradient>
+          <linearGradient id="lens" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#27e6ff" stop-opacity=".55"/><stop offset="1" stop-color="#8a5cff" stop-opacity=".1"/></linearGradient>
+        </defs>
+        <path d="M20 110h360a14 14 0 0 1 14 14v96a30 30 0 0 1-30 30h-50a30 30 0 0 1-25-13l-14-21a48 48 0 0 0-80 0l-14 21a30 30 0 0 1-25 13H36a30 30 0 0 1-30-30v-96a14 14 0 0 1 14-14Z" fill="rgba(18,10,51,.85)" stroke="url(#hb)" stroke-width="5" stroke-linejoin="round"/>
+        <circle cx="100" cy="178" r="46" fill="url(#lens)" stroke="url(#hb)" stroke-width="4"/>
+        <circle cx="300" cy="178" r="46" fill="url(#lens)" stroke="url(#hb)" stroke-width="4"/>
+        <path d="M80 168q20-16 40 0M280 168q20-16 40 0" stroke="#fff" stroke-opacity=".6" stroke-width="3" stroke-linecap="round"/>
+        <path d="M30 110C30 40 90 14 200 14s170 26 170 96" stroke="url(#hb)" stroke-width="5" stroke-linecap="round"/>
+        <rect x="170" y="116" width="60" height="8" rx="4" fill="url(#hb)"/>
+      </svg>
+    </div>
+  </div>
+
+  <section class="gallery" id="trabajos">
+    <div class="sec-head">
+      <h2>Trabajos de los estudiantes</h2>
+      <p>Cada tarjeta abre una experiencia inmersiva en el navegador. Para vivirla mejor, usa pantalla completa o unas gafas VR.</p>
+    </div>
+    <div class="grid" id="grid"></div>
+  </section>
+</main>
+
+<footer>
+  <a class="brand" href="#inicio">
+    <img class="logo" src="logo-unimagdalena.png" alt="" onerror="this.style.display='none';this.nextElementSibling.style.display='grid'">
+    <span class="logo-fallback">UM</span>
+    <b>Universidad del Magdalena<span>Santa Marta, Colombia</span></b>
+  </a>
+  <span>Curso de Realidad Virtual · Licenciatura en Tecnologías</span>
+</footer>
+
+<script>
+/* ====== DATOS: edita aquí títulos, descripciones y enlaces ====== */
+const TRABAJOS = [
+  { titulo:"Página Web Inmersiva", desc:"Sitio web con contenido interactivo y recursos en 3D para explorar de forma inmersiva.",
+    integrantes:["Erlay José Aguilar Gutiérrez"], url:"https://erlayjose.github.io/Pagina-web/", icono:"i-globe" },
+  { titulo:"Zoologic 3D", desc:"Recorrido virtual por el reino animal con modelos 3D que se pueden observar de cerca.",
+    integrantes:["Álvaro Javier Aguirre Tobar","Rafael Alberto Castilla Padilla","Ana Patricia Álvarez Martínez"], url:"https://rafaelcastilla-coder.github.io/zoologic3D/", icono:"i-cube" },
+  { titulo:"Material Educativo", desc:"Recursos educativos en realidad virtual para aprender conceptos de manera visual e interactiva.",
+    integrantes:["Shelsy Lineth Agámez Rodríguez"], url:"https://2412200601.github.io/Material_Educativo/", icono:"i-pano" },
+  { titulo:"TecnoLab XR", desc:"Laboratorio tecnológico en realidad extendida para experimentar y explorar en un entorno virtual.",
+    integrantes:["Eyleen Valentina Cantillo Nuñez"], url:"https://eyleencantillo.github.io/tecnolab-xr/", icono:"i-hand" },
+  { titulo:"Tabla Periódica Interactiva", desc:"Los elementos químicos en un entorno interactivo para conocer sus propiedades de forma dinámica.",
+    integrantes:["María José Florián Solís"], url:"https://majo-florian88.github.io/Tabla_periodica_interactiva/", icono:"i-globe" },
+  { titulo:"Experiencia RV Jorge", desc:"Escena de realidad virtual para recorrer y descubrir contenido en un espacio 3D.",
+    integrantes:["Jorge Mario Linares Caña"], url:"https://jorgelinares491-beep.github.io/RV-JORGE2/", icono:"i-vr" },
+  { titulo:"Galería XR de Fauna", desc:"Galería inmersiva con especies de fauna presentadas en formato 3D y realidad extendida.",
+    integrantes:["Frank David Marquez Blanco"], url:"https://frankdavidmarquezblanco4-cyber.github.io/fauna/galeria-xr.html", icono:"i-pano" },
+  { titulo:"Robotic Lab 3D", desc:"Laboratorio de robótica virtual para explorar y manipular robots y componentes en 3D.",
+    integrantes:["Andrés Camilo Ramírez Cervantes","José Isaac Teherán Rojano","Juan David Varela Perdomo"], url:"https://juand4445.github.io/ROBOTIC_LAB3D/", icono:"i-cube" }
+];
+
+const grid = document.getElementById('grid');
+TRABAJOS.forEach((t,k)=>{
+  const c = document.createElement('article');
+  c.className = 'card';
+  const quien = t.integrantes.length>1 ? 'Integrantes' : 'Integrante';
+  c.innerHTML = `
+    <span class="num">${String(k+1).padStart(2,'0')}</span>
+    <div class="ico"><svg><use href="#${t.icono}"/></svg></div>
+    <h3></h3><p></p>
+    <div class="team"><small>${quien}</small>${t.integrantes.map(()=>`<span></span>`).join('')}</div>
+    <a class="rv-btn" target="_blank" rel="noopener"><svg><use href="#b-vr"/></svg>Entrar en RV</a>`;
+  c.querySelector('h3').textContent = t.titulo;
+  c.querySelector('p').textContent = t.desc;
+  c.querySelectorAll('.team span').forEach((s,i)=>s.textContent=t.integrantes[i]);
+  c.querySelector('a').href = t.url;
+  grid.appendChild(c);
+});
+
+/* ====== Fondo: túnel de portales VR ====== */
+const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+const bg = document.getElementById('bg'), bx = bg.getContext('2d');
+let W,H;const N=16;let z0=0;
+function size(){W=bg.width=innerWidth;H=bg.height=innerHeight;}
+function rr(x,y,w,h,r){bx.beginPath();bx.roundRect?bx.roundRect(x,y,w,h,r):bx.rect(x,y,w,h);}
+function tunnel(){
+  bx.clearRect(0,0,W,H);
+  const g=bx.createRadialGradient(W/2,H*.42,0,W/2,H*.42,Math.max(W,H)*.7);
+  g.addColorStop(0,'rgba(255,62,165,.16)');g.addColorStop(.5,'rgba(100,50,220,.12)');g.addColorStop(1,'rgba(8,3,28,0)');
+  bx.fillStyle=g;bx.fillRect(0,0,W,H);
+  const cx=W/2,cy=H*.42;
+  for(let i=0;i<N;i++){
+    let z=((i+z0)%N)/N;            /* 0 lejos → 1 cerca */
+    const s=Math.pow(z,2.6)*1.9+.02;
+    const w=W*s,h=H*s*.9;
+    bx.strokeStyle=`rgba(${255-z*100|0},${62+z*60|0},${165+z*60|0},${(1-z)*.34*Math.min(1,z*6)})`;
+    bx.lineWidth=1+z*1.6;
+    rr(cx-w/2,cy-h/2,w,h,28*s);bx.stroke();
+  }
+  if(!reduce){z0=(z0+.012)%N;requestAnimationFrame(tunnel);}
+}
+addEventListener('resize',()=>{size();if(reduce)tunnel()});size();tunnel();
+</script>
+</body>
+</html>
